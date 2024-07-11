@@ -1,7 +1,7 @@
 import streamlit as st
 from typing import Generator
 from groq import Groq
-
+from test import return_yes
 st.set_page_config(page_icon="💬", layout="wide",
                    page_title="Groq Goes Brrrrrrrr...")
 
@@ -16,7 +16,7 @@ def icon(emoji: str):
 
 icon("🏎️")
 
-st.subheader("Groq Chat Streamlit App", divider="rainbow", anchor=False)
+st.subheader("Agentic RAG customer service", divider="rainbow", anchor=False)
 
 client = Groq(
     api_key=st.secrets["GROQ_API_KEY"],
@@ -106,7 +106,7 @@ if prompt := st.chat_input("Enter your prompt here..."):
         # Use the generator function with st.write_stream
         with st.chat_message("assistant", avatar="🤖"):
             chat_responses_generator = generate_chat_responses(chat_completion)
-            full_response = st.write_stream(chat_responses_generator)
+            full_response = st.write_stream(chat_responses_generator)+return_yes()
     except Exception as e:
         st.error(e, icon="🚨")
 
